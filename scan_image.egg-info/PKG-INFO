@@ -1,0 +1,135 @@
+Metadata-Version: 2.4
+Name: scan-image
+Version: 0.1.0
+Summary: OCR image scanner with duplicate removal and parallel processing
+Author: WanAnis
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Utilities
+Classifier: Intended Audience :: Developers
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pillow
+Requires-Dist: pytesseract
+Requires-Dist: opencv-python
+Requires-Dist: imagehash
+Requires-Dist: numpy
+Requires-Dist: colorama
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# scan-image
+
+A command-line tool to scan a folder of images and detect whether they contain a specific text phrase using OCR (Tesseract). Supports multiprocessing, perceptual hashing for duplicate suppression and useful logging.
+
+---
+
+### Features
+- OCR phrase search via Tesseract  
+- Duplicate removal using perceptual hashing  
+- Parallel processing for fast scanning  
+- Supports all common image formats (JPG, JPEG, PNG, BMP, TIFF)
+
+---
+
+### Installation
+
+Clone and install in development mode:
+
+```bash
+git clone https://github.com/wbc1wan/scan-image.git
+cd scan-image
+pip install -e .
+```
+
+### Windows Tesseract Installation
+
+1. Download from:  
+   https://github.com/UB-Mannheim/tesseract/wiki  
+2. Install to your local path example:  
+   `C:\Program Files\Tesseract-OCR\tesseract.exe`
+3. Add to PATH or set customized env:
+```powershell
+$env:TESSERACT_PATH = "C:\Program Files\Tesseract-OCR\tesseract.exe"
+```
+
+Verify in terminal:
+
+```powershell
+& $env:TESSERACT_PATH --version
+```
+
+---
+
+### Usage
+
+Scan a folder:
+
+```powershell
+scan-image --f "C:\Users\Pictures\gallery" --p "invoice"
+```
+
+Interactive mode:
+
+```bash
+scan-image
+```
+
+Show version:
+
+```bash
+scan-image --version
+```
+
+---
+
+### Project Structure
+
+```
+scan/
+│
+├── image_util/
+│   ├── __init__.py
+│   ├── scanner.py
+│   ├── utils.py
+│   ├── config.py
+│   ├── logger.py
+│
+├── tests/
+│   ├── test_utils.py
+│   └── test_scanner.py
+│
+├── LICENSE
+├── README.md
+├── requirements.txt
+├── setup.py
+```
+
+---
+
+### Running Tests
+
+```bash
+python -m unittest discover -s tests
+```
+
+With coverage:
+
+```bash
+coverage run -m unittest discover -s tests
+coverage report -m
+```
+
+---
+
+### License
+
+MIT License © Aniez

@@ -1,0 +1,6 @@
+pillow
+pytesseract
+opencv-python
+imagehash
+numpy
+colorama
