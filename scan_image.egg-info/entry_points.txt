@@ -1,2 +1,0 @@
-[console_scripts]
-scan-image = scan_image.scanner:main

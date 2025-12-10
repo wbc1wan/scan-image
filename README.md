@@ -118,13 +118,6 @@ scan-image/
 │   ├── logger.py
 │   ├── scanner.py
 │   └── utils.py
-├── scan_image.egg-info/
-│   ├── dependency_links.txt
-│   ├── entry_points.txt
-│   ├── PKG-INFO
-│   ├── requires.txt
-│   ├── SOURCES.txt
-│   └── top_level.txt
 └── tests/
     ├── test_config.py
     ├── test_logger.py

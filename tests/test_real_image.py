@@ -3,6 +3,7 @@ import unittest
 from unittest.mock import patch
 from scan_image import utils, scanner
 from PIL import Image, ImageDraw
+import shutil  # for checking system executables
 
 class TestIntegrationOCR(unittest.TestCase):
     @classmethod
@@ -27,10 +28,14 @@ class TestIntegrationOCR(unittest.TestCase):
         with open(cls.text_file_path, "w") as f:
             f.write("HELLO_TEST")
 
-        # Check Tesseract
-        cls.tesseract_path = os.getenv("TESSERACT_PATH")
+        # Robust check for Tesseract: either env var or system PATH
+        cls.tesseract_path = os.getenv("TESSERACT_PATH") or shutil.which("tesseract")
         if not cls.tesseract_path:
-            cls.skipTest("Tesseract not configured - skipping full scan test")
+            raise unittest.SkipTest(
+                "Tesseract not installed or not found in PATH — skipping full scan test"
+            )
+        # Optionally set environment variable for code that uses TESSERACT_PATH
+        os.environ["TESSERACT_PATH"] = cls.tesseract_path
 
     @classmethod
     def tearDownClass(cls):

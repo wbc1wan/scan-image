@@ -29,13 +29,17 @@ jobs:
     - name: Install Tesseract OCR
       run: sudo apt-get update && sudo apt-get install -y tesseract-ocr
 
-    - name: Install and run tests in venv
+    - name: Create and activate venv, install dependencies
       run: |
         python -m venv venv
         source venv/bin/activate
         python -m pip install --upgrade pip setuptools wheel
         pip install -e .
         pip install coverage
+
+    - name: Run unit tests with coverage
+      run: |
+        source venv/bin/activate
         coverage run --source=scan_image -m unittest discover -s tests -v
         coverage report -m
         coverage html
